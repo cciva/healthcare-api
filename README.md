@@ -1,0 +1,5 @@
+- medical exam arrangement
+- medical staff info
+- easy blood and organ donation application and lifecycle
+- medical records, trials arragement and processing
+- integration with pharmacies' systems
