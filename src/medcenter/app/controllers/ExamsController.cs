@@ -5,17 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
-using System.Net;
-using NLog;
 
 namespace MedCenter.V1
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/exams")]    
-    public class ExamController : MedController
+    [Route("api/v{version:apiVersion}/[controller]")]    
+    public class ExamsController : MedController
     {
-        public ExamController(IConfiguration conf)
+        public ExamsController(IConfiguration conf)
             : base(conf)
         {
 

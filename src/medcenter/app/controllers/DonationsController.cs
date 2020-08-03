@@ -4,16 +4,15 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using NLog;
 
 namespace MedCenter.V1
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/donations")]
-    public class DonationController : MedController
+    [Route("api/v{version:apiVersion}/[controller]")]
+    public class DonationsController : MedController
     {
-        public DonationController(IConfiguration conf)
+        public DonationsController(IConfiguration conf)
             : base(conf)
         {
 

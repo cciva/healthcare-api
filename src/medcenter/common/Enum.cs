@@ -1,11 +1,12 @@
-namespace MedCenter.V1
+namespace MedCenter
 {
     public enum UserKind
     {
         Patient,
         Nurse,
         Doctor,
-        Operator
+        Operator,
+        Administrator
     }
 
     public enum DonationType

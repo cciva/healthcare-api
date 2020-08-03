@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.DataProtection;
 
-namespace MedCenter
+namespace MedCenter.TMp
 {
     public class Program
     {
@@ -14,9 +14,19 @@ namespace MedCenter
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                // .ConfigureAppConfiguration((c, wb) => {
+                //     AddConfiguration(c, wb);
+                // })
                 .ConfigureWebHostDefaults(wb =>
                 {
                     wb.UseStartup<Startup>();
                 });
+
+        // private static void AddConfiguration(HostBuilderContext context, 
+        //                                      IConfigurationBuilder builder)
+        // {
+        //     IConfiguration configuration = builder.Build();
+        //     builder.IncludeSensitiveFile(new CryptoBridge("sensitive-conf"), "sensitive.json", false, true);
+        // }
     }
 }

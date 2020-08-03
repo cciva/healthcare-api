@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing; 
 using System;
 
-namespace MedCenter.V1
+namespace MedCenter
 {
     public class DonationTypeConstraint : IRouteConstraint
     {

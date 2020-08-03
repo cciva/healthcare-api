@@ -1,6 +1,6 @@
 using System;
 
-namespace MedCenter.V1
+namespace MedCenter
 {
     public class ExamRq
     {

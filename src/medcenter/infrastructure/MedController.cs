@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using NLog;
 
-namespace MedCenter.V1
+namespace MedCenter
 {
     public abstract class MedController : Controller
     {

@@ -1,0 +1,15 @@
+{
+    "Auth0": {
+    "Domain": "dev-bdadfu3r.eu.auth0.com",
+    "Audience": "http://med-center/api",
+    "Policies" : [
+      "read:medrecords",
+      "modify:medrecords",
+      "read:exams",
+      "arrange:exams",
+      "cancel:exams",
+      "fetch:medrecord",
+      "admin:status"
+    ]
+  }
+}

@@ -5,18 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 
-namespace MedCenter.V1
+namespace MedCenter
 {
     public class Startup
     {
@@ -30,25 +25,12 @@ namespace MedCenter.V1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.Configure<RouteOptions>(options =>
-            {
-                options.ConstraintMap.Add("donationType", typeof(DonationTypeConstraint));
-            });
+            services.SetupAuth(Configuration);
 
-            // services.AddAuthentication(options =>
-            // {
-            //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            // }).AddJwtBearer(options =>
-            // {
-            //     options.Authority = $"https://{Configuration["Auth0:Domain"]}/";
-            //     options.Audience = Configuration["Auth0:ApiIdentifier"];
-            //     options.TokenValidationParameters = new TokenValidationParameters
-            //     {
-            //         NameClaimType = ClaimTypes.NameIdentifier
-            //     };
-            // });
+            services.Configure<RouteOptions>(o =>
+            {
+                o.ConstraintMap.Add("donationType", typeof(DonationTypeConstraint));
+            });
 
             services.AddApiVersioning(v =>
             {
@@ -68,9 +50,9 @@ namespace MedCenter.V1
             }
 
             app.UseHttpsRedirection();
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseRouting();
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

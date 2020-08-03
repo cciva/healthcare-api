@@ -5,16 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
-using NLog;
 
 namespace MedCenter.V1
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/medrecords")]    
-    public class RecordsController : MedController
+    [Route("api/v{version:apiVersion}/[controller]")]    
+    public class MedrecordsController : MedController
     {
-        public RecordsController(IConfiguration conf)
+        public MedrecordsController(IConfiguration conf)
             : base(conf)
         {
 
@@ -25,7 +24,7 @@ namespace MedCenter.V1
         // for the assesment needs, this action only returns simple string
         // it could be easily modified to return complex object
         // in real-world scenario
-        [HttpPost("{patientId}")]
+        [HttpGet("{patientId}")]
         [Authorize("fetch:medrecords")]
         public async Task<IActionResult> Fetch(string patientId)
         {
