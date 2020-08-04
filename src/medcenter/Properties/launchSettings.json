@@ -4,7 +4,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:29077",
+      "applicationUrl": "http://localhost:29077/medcenter",
       "sslPort": 44361
     }
   },
@@ -21,7 +21,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "medcenter",
-      "applicationUrl": "https://localhost:5001",
+      "applicationUrl": "https://localhost:5001/medcenter",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

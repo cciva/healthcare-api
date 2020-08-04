@@ -22,7 +22,7 @@ namespace MedCenter.V1
         // only administrators have access to
         // these api calls
         [HttpGet("status")]
-        //[Authorize("admin:status")]
+        [Authorize("admin:status")]
         public async Task<IActionResult> Status()
         {
             return await Task.FromResult(Ok(true));
