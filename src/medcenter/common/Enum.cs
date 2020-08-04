@@ -15,4 +15,17 @@ namespace MedCenter
         Organs,
         Other
     }
+
+    // application environment:
+    // - dev
+    // - testing
+    // - staging
+    // - production
+    public enum AppEnv
+    {
+        Dev,
+        Testing,
+        Staging,
+        Production
+    }
 }

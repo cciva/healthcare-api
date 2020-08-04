@@ -1,6 +1,6 @@
 namespace MedCenter
 {
-    public class AuthOptions
+    public class Auth0
     {
         public string Domain { get;set; }
         public string AppId { get;set; }

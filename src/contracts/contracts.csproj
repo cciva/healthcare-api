@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutDir>../../build</OutDir>
+    <BaseIntermediateOutputPath>../../build/contracts</BaseIntermediateOutputPath>
+  </PropertyGroup>
+
+</Project>

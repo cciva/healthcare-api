@@ -18,27 +18,33 @@ using System.IO;
 
 namespace MedCenter
 {
+    public static class SequenceExtensions
+    {
+        public static void Each<T>(this IEnumerable<T> source, Action<T> action)
+        {
+            if(source == null || source.Count() == 0 || action == null)
+                return;
+            
+            foreach(var src in source)
+                action(src);
+        }
+    }
+
     public static class ServiceExtensions
     {
-        public static void SetupAuth(this IServiceCollection services, IConfiguration conf)
+        public static void SetupAuth0(this IServiceCollection services, IConfiguration conf)
         {
-            string domain = $"https://{conf["Auth0:Domain"]}/";
-            string appid = conf["Auth0:ApiIdentifier"];
-            IConfigurationSection ps = conf.GetSection("Auth0:Policies");
-            string[] policies = ps.Get<string[]>();
-
-            services.Configure<AuthOptions>(o => {
-                conf.GetSection("Auth0").Bind(o);
-            });
-
+            var ao = conf.GetSection("Auth0").Get<Auth0>();
+            var env = (AppEnv)conf.GetValue(typeof(AppEnv), "Env");
             services.AddAuthentication(o =>
             {
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(o =>
             {
-                o.Authority = domain;
-                o.Audience = appid;
+                o.Authority = ao.Domain;
+                o.Audience = ao.AppId;
+                o.RequireHttpsMetadata = (env == AppEnv.Production);
                 o.TokenValidationParameters = new TokenValidationParameters
                 {
                     NameClaimType = ClaimTypes.NameIdentifier
@@ -47,13 +53,12 @@ namespace MedCenter
 
             services.AddAuthorization(o =>
             {
-                o.AddPolicy("read:medrecords", policy => policy.Requirements.Add(new HasScopeRequirement("read:medrecords", domain)));
-                o.AddPolicy("modify:medrecords", policy => policy.Requirements.Add(new HasScopeRequirement("modify:medrecords", domain)));
-                o.AddPolicy("read:exams", policy => policy.Requirements.Add(new HasScopeRequirement("read:exams", domain)));
-                o.AddPolicy("arrange:exams", policy => policy.Requirements.Add(new HasScopeRequirement("arrange:exams", domain)));
-                o.AddPolicy("cancel:exams", policy => policy.Requirements.Add(new HasScopeRequirement("cancel:exams", domain)));
-                o.AddPolicy("fetch:medrecord", policy => policy.Requirements.Add(new HasScopeRequirement("fetch:medrecord", domain)));
-                o.AddPolicy("admin:status", policy => policy.Requirements.Add(new HasScopeRequirement("admin:status", domain)));
+                ao.Policies
+                    .AsEnumerable<string>()
+                    .Each(p => {
+                        HasScopeRequirement req = new HasScopeRequirement(p, ao.Domain);
+                        o.AddPolicy(p, policy => policy.Requirements.Add(req));
+                    });
             });
 
             // register the scope authorization handler

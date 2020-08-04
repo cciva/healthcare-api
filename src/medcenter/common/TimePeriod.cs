@@ -2,16 +2,11 @@ using System;
 
 namespace MedCenter
 {
-    public class DateFilter
+    public class TimePeriod
     {
         private DateTime _from = DateTime.MinValue;
         private DateTime _to = DateTime.Now;
-
-        public DateFilter()
-        {
-
-        }
-
+        
         public DateTime From
         {
             get { return _from; }

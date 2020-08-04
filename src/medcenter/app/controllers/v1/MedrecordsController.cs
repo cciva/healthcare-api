@@ -10,7 +10,7 @@ namespace MedCenter.V1
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]    
+    [Route("v{version:apiVersion}/[controller]")]    
     public class MedrecordsController : MedController
     {
         public MedrecordsController(IConfiguration conf)
@@ -19,8 +19,7 @@ namespace MedCenter.V1
 
         }
 
-        // only nurses and doctor are able to read patient's medical
-        // record
+        // only nurses and doctor are able to read patient's medical record
         // for the assesment needs, this action only returns simple string
         // it could be easily modified to return complex object
         // in real-world scenario

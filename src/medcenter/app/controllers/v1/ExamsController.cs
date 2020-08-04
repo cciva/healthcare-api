@@ -10,7 +10,7 @@ namespace MedCenter.V1
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]    
+    [Route("v{version:apiVersion}/[controller]")]    
     public class ExamsController : MedController
     {
         public ExamsController(IConfiguration conf)
@@ -88,6 +88,8 @@ namespace MedCenter.V1
         }
         
         // this should be the storage layer code
+        // later on in V2, when we decide to improve our API for instance
+        // this will be replaced with mediator pattern 
         private bool Find<T>(string id, out T obj) where T : new()
         {
             obj = new T();

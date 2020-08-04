@@ -9,7 +9,7 @@ namespace MedCenter.V1
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("v{version:apiVersion}/[controller]")]
     public class DonationsController : MedController
     {
         public DonationsController(IConfiguration conf)
